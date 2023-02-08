@@ -14,9 +14,6 @@ const ContactForm = () => {
       const timer = setTimeout(() => {
         setRequestStatus(null);
         setError(null);
-        enteredEmail.current.value = "";
-        enteredName.current.value = "";
-        enteredMessage.current.value = "";
       }, 3000);
       return () => clearTimeout(timer);
     }
@@ -44,6 +41,9 @@ const ContactForm = () => {
         throw new Error(data.message || "Something went wrong");
       }
       setRequestStatus("success");
+      enteredEmail.current.value = "";
+      enteredName.current.value = "";
+      enteredMessage.current.value = "";
     } catch (error) {
       setError(error.message);
       setRequestStatus("error");
