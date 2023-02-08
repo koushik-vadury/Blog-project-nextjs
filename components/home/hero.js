@@ -7,12 +7,12 @@ const Hero = () => {
       <div className={classes.image}>
         <Image
           src="/images/site/koushik_vaduri.png"
-          alt="koushik vadury"
+          alt="koushik-vadury"
           width={300}
           height={300}
         />
       </div>
-      <h1>Hi, I'm Koushik</h1>
+      <h1>Hi, I&apos;m Koushik</h1>
       <p>
         I blog about web development- especially frontend frameworks like
         Reactjs
