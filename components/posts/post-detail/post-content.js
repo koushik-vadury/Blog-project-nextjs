@@ -30,7 +30,7 @@ const PostContent = (props) => {
       const { node } = code;
       const value = node.children[0].value;
       const language = code.className.split("-")[1];
-      return <SyntaxHighlighter children={value} language={language} />;
+      return <SyntaxHighlighter>{value}</SyntaxHighlighter>;
     },
   };
   return (
