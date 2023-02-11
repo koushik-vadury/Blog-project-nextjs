@@ -6,7 +6,7 @@
   background-color: var(--color-grey-800);
   padding: 0 var(--size-8);
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
-  position: absolute;
+  position: fixed;
   height: 4rem;
   bottom: 0;
   width: 100%;

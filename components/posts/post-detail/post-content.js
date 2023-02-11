@@ -1,25 +1,45 @@
+import SyntaxHighlighter from "react-syntax-highlighter";
 import classes from "./post-content.module.css";
 import PostHeader from "./post-header";
 import ReactMarkdown from "react-markdown";
+import Image from "next/image";
 
-const DUMMY_POST = {
-  slug: "getting-started-with-nextjs",
-  title: "Getting started with nextjs",
-  image: "getting-started-nextjs.png",
-  excerpt:
-    "Nextjs is a the react framework for production - it makes building fullstack react apps and sites a breeze and ships with built in SSR",
-  date: "2022-02-10",
-  content: "# This is a first post",
-};
+const PostContent = (props) => {
+  const { post } = props;
 
-const PostContent = () => {
+  const customRenderers = {
+    p(p) {
+      const { node } = p;
+      if (node.children[0].type === "element") {
+        const image = node.children[0];
+        return (
+          <div className={classes.image}>
+            <Image
+              src={`/images/posts/${post.slug}/${image.properties.src}`}
+              alt={image.properties.alt}
+              width={600}
+              height={300}
+              layout="responsive"
+            />
+          </div>
+        );
+      }
+      return <p>{p.children}</p>;
+    },
+    code(code) {
+      const { node } = code;
+      const value = node.children[0].value;
+      const language = code.className.split("-")[1];
+      return <SyntaxHighlighter children={value} language={language} />;
+    },
+  };
   return (
     <article className={classes.content}>
       <PostHeader
-        title={DUMMY_POST.title}
-        image={`/images/posts/${DUMMY_POST.slug}/${DUMMY_POST.image}`}
+        title={post.title}
+        image={`/images/posts/${post.slug}/${post.image}`}
       />
-      <ReactMarkdown>{DUMMY_POST.content}</ReactMarkdown>
+      <ReactMarkdown components={customRenderers}>{post.content}</ReactMarkdown>
     </article>
   );
 };
